@@ -1,8 +1,7 @@
 import typing
 from typing import Any, Dict, List, Optional
 
-from jupyter_client import KernelConnectionInfo
-from jupyter_client import KernelProvisionerBase
+from jupyter_client import KernelConnectionInfo, KernelProvisionerBase
 
 
 class LibytKernelProvisioner(KernelProvisionerBase):  # type:ignore
@@ -77,7 +76,9 @@ class LibytKernelProvisioner(KernelProvisionerBase):  # type:ignore
 
     def _get_kernel_info(self, target_file: str) -> typing.Union[int, dict]:
         # Get LIBYT_KERNEL_INFO_DIR in environment variable
-        import os, json
+        import json
+        import os
+
         libyt_kernel_info_dir = os.getenv("LIBYT_KERNEL_INFO_DIR")
         if libyt_kernel_info_dir is None:
             msg = "Environment variable LIBYT_KERNEL_INFO_DIR not set."
@@ -89,8 +90,9 @@ class LibytKernelProvisioner(KernelProvisionerBase):  # type:ignore
             with open(target_file_fullpath, "r") as f:
                 data = json.load(f)
         except FileNotFoundError:
-            msg = ("Unable to open '%s'\n"
-                   "(LIBYT_KERNEL_INFO_DIR='%s')") % target_file_fullpath, libyt_kernel_info_dir
+            msg = (
+                "Unable to open '%s'\n" "(LIBYT_KERNEL_INFO_DIR='%s')"
+            ) % target_file_fullpath, libyt_kernel_info_dir
             raise FileNotFoundError(msg)
 
         return data
