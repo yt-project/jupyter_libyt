@@ -1,3 +1,5 @@
+import json
+import os
 import typing
 from typing import Any, Dict, List, Optional
 
@@ -16,26 +18,23 @@ class LibytKernelProvisioner(KernelProvisionerBase):  # type:ignore
 
     @property
     def has_process(self) -> bool:
-        """
-        If this provisioner is currently managing a process.
-        """
-        # TODO: Maybe I should make a file to indicate whether it is alive or not.
-        return True
+        # Find if kernel pid file exist
+        return self._get_kernel_state()
 
     async def poll(self) -> Optional[int]:
-        """
-        Check if kernel process is still running.
-        """
-        # TODO: Maybe I should make a file to indicate whether it is alive or not.
-        #       (No code returned in our case)
-        return None
+        # If running, None is returned, otherwise, always assume success and return 0
+        if self._get_kernel_state():
+            return None
+        else:
+            return 0
 
     async def wait(self) -> Optional[int]:
-        # TODO: Not sure if I need this, (closing stdout/stderr/stdin)
+        # Not sure if I need this, (when closing stdout/stderr/stdin, though currently not supported)
         return 0
 
     async def send_signal(self, signum: int) -> None:
-        # TODO: Not sure if I need this, this sends signal to process, but libyt kernel don't need that.
+        # Sends signal to process, but currently libyt kernel don't need that.
+        # libyt kernel will get msg from server.
         return
 
     async def kill(self, restart: bool = False) -> None:
@@ -76,9 +75,6 @@ class LibytKernelProvisioner(KernelProvisionerBase):  # type:ignore
 
     def _get_kernel_info(self, target_file: str) -> typing.Union[int, dict]:
         # Get LIBYT_KERNEL_INFO_DIR in environment variable
-        import json
-        import os
-
         libyt_kernel_info_dir = os.getenv("LIBYT_KERNEL_INFO_DIR")
         if libyt_kernel_info_dir is None:
             msg = "Environment variable LIBYT_KERNEL_INFO_DIR not set."
@@ -96,3 +92,16 @@ class LibytKernelProvisioner(KernelProvisionerBase):  # type:ignore
             raise FileNotFoundError(msg)
 
         return data
+
+    def _get_kernel_state(self) -> bool:
+        # Get LIBYT_KERNEL_INFO_DIR in environment variable
+        libyt_kernel_info_dir = os.getenv("LIBYT_KERNEL_INFO_DIR")
+        if libyt_kernel_info_dir is None:
+            msg = "Environment variable LIBYT_KERNEL_INFO_DIR not set."
+            raise ValueError(msg)
+
+        # Check if kernel pid file exist
+        # kernel pid file is removed by libyt kernel when it shuts down
+        target_file_fullpath = os.path.join(libyt_kernel_info_dir, self.kernel_pid_filename)
+
+        return os.path.isfile(target_file_fullpath)
