@@ -25,7 +25,7 @@ license-files = ["LICENSE"]
 version = {attr = "jupyter_libyt._version.__version__"}
 
 [project.urls]
-"Homepage" = "https://github.com/data-exp-lab/jupyter_libyt"
+"Homepage" = "https://github.com/yt-project/jupyter_libyt"
 
 [build-system]
 requires = ["setuptools", "wheel"]

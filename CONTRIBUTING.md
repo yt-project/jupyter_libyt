@@ -1,7 +1,7 @@
 # Contributing
 
 ## Report Bugs and Submit Feedback
-Report bugs at https://github.com/data-exp-lab/jupyter_libyt/issues.
+Report bugs at https://github.com/yt-project/jupyter_libyt/issues.
 
 If you are reporting a bug, please include:
 
