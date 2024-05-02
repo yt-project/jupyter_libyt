@@ -25,7 +25,7 @@ jobs:
             toxenv: "py312"
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4.7.1
+      - uses: actions/setup-python@v5.1.0
         with:
           python-version: ${{ matrix.python.version }}
       - name: Install tox
@@ -35,7 +35,7 @@ jobs:
       - name: Run pytest
         run: tox -e ${{ matrix.python.toxenv }} -- --html=report.html --self-contained-html
       - name: Upload pytest report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pytest-report-${{ matrix.python.toxenv }}
           path: report.html
