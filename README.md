@@ -6,4 +6,4 @@ This is a Jupyter provisioner for [`libyt`](https://github.com/yt-project/libyt)
 * **Jupyter Project**: https://jupyter.org/
 * **YT Project**: https://yt-project.org/
 * **libyt Repo**: https://github.com/yt-project/libyt
-* **libyt Doc**: https://yt-project.github.io/libyt/
+* **libyt Doc**: https://libyt.readthedocs.io/en/latest/
