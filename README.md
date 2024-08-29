@@ -1,5 +1,6 @@
 # Jupyter libyt
 
+[![PyPI version](https://badge.fury.io/py/jupyter-libyt.svg)](https://badge.fury.io/py/jupyter-libyt)
 
 This is a Jupyter provisioner for [`libyt`](https://github.com/yt-project/libyt) kernel.
 
