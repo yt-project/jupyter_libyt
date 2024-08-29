@@ -74,6 +74,13 @@ class LibytKernelProvisioner(KernelProvisionerBase):  # type:ignore
         pass
 
     def _get_kernel_info(self, target_file: str) -> typing.Union[int, dict]:
+        # Print version info
+        from .. import _version
+
+        print(
+            f"jupyter_libyt version {_version.__version__} (required libyt version >=0.1.0,<1.0.0)"
+        )
+
         # Get LIBYT_KERNEL_INFO_DIR in environment variable
         libyt_kernel_info_dir = os.getenv("LIBYT_KERNEL_INFO_DIR")
         if libyt_kernel_info_dir is None:
