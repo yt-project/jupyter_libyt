@@ -95,24 +95,6 @@
         "access": "public"
     },
     "jupyterlab": {
-        "discovery": {
-            "kernel": [
-                {
-                    "kernel_spec": {
-                        "language": "python",
-                        "display_name": "Libyt",
-                        "metadata": {
-                            "kernel_provisioner": {
-                                "provisioner_name": "libyt-kernel-provisioner"
-                            }
-                        }
-                    },
-                    "base": {
-                        "name": "libyt"
-                    }
-                }
-            ]
-        },
         "extension": true,
         "outputDir": "jupyter_libyt/labextension",
         "schemaDir": "schema"

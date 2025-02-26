@@ -37,16 +37,20 @@ libyt-kernel-provisioner = "jupyter_libyt.provisioning.libyt_kernel_provisioner:
 [tool.hatch.version]
 source = "nodejs"
 
+[tool.hatch.build.hooks.version]
+path = "jupyter_libyt/_version.py"
+
+[tool.hatch.build.hooks.custom]
+# used to call hatch_build.py
+
 [tool.hatch.build.targets.sdist]
+include = ["jupyter_libyt"]
 artifacts = ["jupyter_libyt/labextension"]
 exclude = [".github", "binder"]
 
 [tool.hatch.build.targets.wheel.shared-data]
 "jupyter_libyt/labextension" = "share/jupyter/labextensions/jupyter-libyt"
 "install.json" = "share/jupyter/labextensions/jupyter-libyt/install.json"
-
-[tool.hatch.build.hooks.version]
-path = "jupyter_libyt/_version.py"
 
 [tool.hatch.build.hooks.jupyter-builder]
 dependencies = ["hatch-jupyter-builder>=0.5"]
