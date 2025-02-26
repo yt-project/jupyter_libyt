@@ -1,0 +1,15 @@
+{
+  "jupyter.lab.toolbars": {
+    "Notebook": [
+      {
+        "name": "clear-all-outputs",
+        "command": "notebook:clear-all-cell-outputs"
+      }
+    ]
+  },
+  "title": "jupyter-libyt/toolbar-button",
+  "description": "jupyter-libyt/toolbar-button settings.",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false
+}
