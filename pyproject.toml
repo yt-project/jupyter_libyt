@@ -82,7 +82,7 @@ before-build-npm = [
 ]
 before-build-python = ["jlpm clean:all"]
 
-# tools config
+### tools config ###
 [tool.check-wheel-contents]
 ignore = ["W002"]
 
@@ -97,3 +97,10 @@ combine_as_imports = true
 skip_gitignore = true
 #skip = [""]  # use default settings for now
 
+#[tool.mypy]
+#;python_version = 3.7
+#;warn_unused_configs = True
+#;show_error_context = True
+#;pretty = True
+#;namespace_packages = True
+#;check_untyped_defs = True

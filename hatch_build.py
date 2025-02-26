@@ -2,7 +2,6 @@ import json
 import os.path
 import sys
 from tempfile import TemporaryDirectory
-from typing import Any
 
 from hatchling.builders.hooks.plugin.interface import BuildHookInterface
 from jupyter_client.kernelspec import KernelSpecManager
@@ -15,7 +14,7 @@ kernel_json = {
 
 
 class CustomHook(BuildHookInterface):
-    def initialize(self, version: str, build_data: dict[str, Any]) -> None:
+    def initialize(self, version, build_data) -> None:
         here = os.path.abspath(os.path.dirname(__file__))
         sys.path.insert(0, here)
 
