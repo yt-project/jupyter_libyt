@@ -1,4 +1,6 @@
 {
+  "title": "jupyter-libyt",
+  "description": "jupyter-libyt settings.",
   "jupyter.lab.toolbars": {
     "Notebook": [
       {
@@ -7,9 +9,6 @@
       }
     ]
   },
-  "title": "jupyter-libyt/toolbar-button",
-  "description": "jupyter-libyt/toolbar-button settings.",
-  "type": "object",
-  "properties": {},
-  "additionalProperties": false
+  "additionalProperties": false,
+  "type": "object"
 }
