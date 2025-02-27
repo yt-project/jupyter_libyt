@@ -6,6 +6,10 @@
       {
         "name": "clear-all-outputs",
         "command": "notebook:clear-all-cell-outputs"
+      },
+      {
+        "name": "interrupt",
+        "command": "jupyter-libyt:interrupt"
       }
     ]
   },
