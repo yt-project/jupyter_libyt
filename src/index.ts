@@ -7,14 +7,66 @@ import { Notification } from '@jupyterlab/apputils';
 import {
   stopIcon,
   refreshIcon,
-  fastForwardIcon
+  fastForwardIcon,
+  LabIcon
 } from '@jupyterlab/ui-components';
 
-const CommandIds = {
-  Interrupt: 'jupyter-libyt:interrupt',
-  Restart: 'jupyter-libyt:restart',
-  RestartRunAll: 'jupyter-libyt:restart-run-all'
+type JupyterLibytCommandWrapper = {
+  command_id: string;
+  label: string;
+  caption: string;
+  icon: LabIcon;
+  libyt_execute: () => void;
+  jupyter_execute: (app: JupyterFrontEnd) => void;
 };
+
+const CommandIds: JupyterLibytCommandWrapper[] = [
+  {
+    command_id: 'jupyter-libyt:interrupt',
+    label: 'Interrupt',
+    caption: 'Interrupt the kernel',
+    icon: stopIcon,
+    libyt_execute: () => {
+      Notification.warning(
+        'Interrupt the kernel is not supported in jupyter-libyt',
+        { autoClose: 3000 }
+      );
+    },
+    jupyter_execute: (app: JupyterFrontEnd) => {
+      app.commands.execute('kernelmenu:interrupt');
+    }
+  },
+  {
+    command_id: 'jupyter-libyt:restart',
+    label: 'Restart',
+    caption: 'Restart the kernel',
+    icon: refreshIcon,
+    libyt_execute: () => {
+      Notification.warning(
+        'Restart the kernel is not supported in jupyter-libyt',
+        { autoClose: 3000 }
+      );
+    },
+    jupyter_execute: (app: JupyterFrontEnd) => {
+      app.commands.execute('kernelmenu:restart');
+    }
+  },
+  {
+    command_id: 'jupyter-libyt:restart-run-all',
+    label: 'Restart and run all cells',
+    caption: 'Restart the kernel and run all cells',
+    icon: fastForwardIcon,
+    libyt_execute: () => {
+      Notification.warning(
+        'Restart the kernel and run all cells is not supported in jupyter-libyt',
+        { autoClose: 3000 }
+      );
+    },
+    jupyter_execute: (app: JupyterFrontEnd) => {
+      app.commands.execute('notebook:restart-run-all');
+    }
+  }
+];
 
 /**
  * Initialization data for the jupyter-libyt extension.
@@ -29,61 +81,23 @@ const plugin: JupyterFrontEndPlugin<void> = {
 
     const { commands } = app;
 
-    // Add behavior to interrupt
-    commands.addCommand(CommandIds.Interrupt, {
-      label: 'Interrupt',
-      caption: 'Interrupt the kernel',
-      icon: stopIcon,
-      execute: () => {
-        let kernel_name =
-          tracker.currentWidget?.context.sessionContext?.session?.kernel?.name;
-        if (kernel_name === 'libyt_kernel') {
-          Notification.warning(
-            'Interrupt the kernel is not supported in jupyter-libyt',
-            { autoClose: 3000 }
-          );
-        } else {
-          commands.execute('kernelmenu:interrupt');
+    // Add JupyterLibytCommands behavior
+    CommandIds.forEach(command => {
+      commands.addCommand(command.command_id, {
+        label: command.label,
+        caption: command.caption,
+        icon: command.icon,
+        execute: () => {
+          let kernel_name =
+            tracker.currentWidget?.context.sessionContext?.session?.kernel
+              ?.name;
+          if (kernel_name === 'libyt_kernel') {
+            command.libyt_execute();
+          } else {
+            command.jupyter_execute(app);
+          }
         }
-      }
-    });
-
-    // Add behavior to restart
-    commands.addCommand(CommandIds.Restart, {
-      label: 'Restart',
-      caption: 'Restart the kernel',
-      icon: refreshIcon,
-      execute: () => {
-        let kernel_name =
-          tracker.currentWidget?.context.sessionContext?.session?.kernel?.name;
-        if (kernel_name === 'libyt_kernel') {
-          Notification.warning(
-            'Restart the kernel is not supported in jupyter-libyt',
-            { autoClose: 3000 }
-          );
-        } else {
-          commands.execute('kernelmenu:restart');
-        }
-      }
-    });
-
-    // Add behavior to restart and run all
-    commands.addCommand(CommandIds.RestartRunAll, {
-      label: 'Restart and run all cells',
-      caption: 'Restart the kernel and run all cells',
-      icon: fastForwardIcon,
-      execute: () => {
-        let kernel_name =
-          tracker.currentWidget?.context.sessionContext?.session?.kernel?.name;
-        if (kernel_name === 'libyt_kernel') {
-          Notification.warning(
-            'Restart the kernel and run all cells is not supported in jupyter-libyt',
-            { autoClose: 3000 }
-          );
-        } else {
-          commands.execute('notebook:restart-run-all');
-        }
-      }
+      });
     });
   }
 };
