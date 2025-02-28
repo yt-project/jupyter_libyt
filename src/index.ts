@@ -81,7 +81,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
 
     const { commands } = app;
 
-    // Add JupyterLibytCommands behavior
+    // Add behavior to existing button (interrupt/restart/restart and run all)
     CommandIds.forEach(command => {
       commands.addCommand(command.command_id, {
         label: command.label,
