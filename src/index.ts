@@ -3,6 +3,8 @@ import {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { INotebookTracker } from '@jupyterlab/notebook';
+import { IMainMenu } from '@jupyterlab/mainmenu';
+import { Widget } from '@lumino/widgets';
 import { Notification } from '@jupyterlab/apputils';
 import {
   stopIcon,
@@ -75,8 +77,8 @@ const plugin: JupyterFrontEndPlugin<void> = {
   id: 'jupyter-libyt:plugin',
   description: 'A JupyterLab extension for libyt.',
   autoStart: true,
-  requires: [INotebookTracker],
-  activate: (app: JupyterFrontEnd, tracker: INotebookTracker) => {
+  requires: [INotebookTracker, IMainMenu],
+  activate: (app: JupyterFrontEnd, tracker: INotebookTracker, mainMenu: IMainMenu) => {
     console.log('[jupyter_libyt] frontend extension activated', app);
 
     const { commands } = app;
@@ -98,6 +100,22 @@ const plugin: JupyterFrontEndPlugin<void> = {
           }
         }
       });
+    });
+
+    // Main menu
+    mainMenu.kernelMenu.kernelUsers.interruptKernel.add({
+      id: 'jupyter-libyt:interrupt',
+      isEnabled: (w: Widget) => {
+        let kernel_name =
+          tracker.currentWidget?.context.sessionContext?.session?.kernel?.name;
+        if (kernel_name == undefined) {
+          return false;
+        } else {
+          // enable jupyter-libyt:interrupt if the kernel is libyt_kernel
+          return kernel_name === 'libyt_kernel';
+        }
+      },
+      rank: 1
     });
   }
 };
