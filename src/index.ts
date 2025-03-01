@@ -102,7 +102,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
       });
     });
 
-    // Main menu
+    // Change kernel main menu behavior
     mainMenu.kernelMenu.kernelUsers.interruptKernel.add({
       id: 'jupyter-libyt:interrupt',
       isEnabled: (w: Widget) => {
@@ -111,11 +111,25 @@ const plugin: JupyterFrontEndPlugin<void> = {
         if (kernel_name == undefined) {
           return false;
         } else {
-          // enable jupyter-libyt:interrupt if the kernel is libyt_kernel
+          // enable jupyter-libyt command wrapper if the kernel is libyt_kernel
           return kernel_name === 'libyt_kernel';
         }
       },
       rank: 1
+    });
+
+    mainMenu.kernelMenu.kernelUsers.restartKernel.add({
+      id: 'jupyter-libyt:restart',
+      isEnabled: (w: Widget) => {
+        let kernel_name =
+          tracker.currentWidget?.context.sessionContext?.session?.kernel?.name;
+        if (kernel_name == undefined) {
+          return false;
+        } else {
+          // enable jupyter-libyt command wrapper if the kernel is libyt_kernel
+          return kernel_name === 'libyt_kernel';
+        }
+      }
     });
   }
 };
