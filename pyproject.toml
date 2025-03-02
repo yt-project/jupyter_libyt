@@ -11,7 +11,7 @@ description = "A Jupyter kernel provisioner for libyt"
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.7"
-keywords = ["jupyter"]
+keywords = ["jupyter", "jupyterlab", "jupyterlab-extension", "kernel", "libyt", "libyt_kernel"]
 classifiers = [
     "Framework :: Jupyter",
     "Framework :: Jupyter :: JupyterLab",
