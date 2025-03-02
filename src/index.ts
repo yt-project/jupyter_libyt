@@ -78,7 +78,11 @@ const plugin: JupyterFrontEndPlugin<void> = {
   description: 'A JupyterLab extension for libyt.',
   autoStart: true,
   requires: [INotebookTracker, IMainMenu],
-  activate: (app: JupyterFrontEnd, tracker: INotebookTracker, mainMenu: IMainMenu) => {
+  activate: (
+    app: JupyterFrontEnd,
+    tracker: INotebookTracker,
+    mainMenu: IMainMenu
+  ) => {
     console.log('[jupyter_libyt] frontend extension activated', app);
 
     const { commands } = app;
@@ -90,7 +94,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
         caption: command.caption,
         icon: command.icon,
         execute: () => {
-          let kernel_name =
+          const kernel_name =
             tracker.currentWidget?.context.sessionContext?.session?.kernel
               ?.name;
           if (kernel_name === 'libyt_kernel') {
@@ -106,9 +110,9 @@ const plugin: JupyterFrontEndPlugin<void> = {
     mainMenu.kernelMenu.kernelUsers.interruptKernel.add({
       id: 'jupyter-libyt:interrupt',
       isEnabled: (w: Widget) => {
-        let kernel_name =
+        const kernel_name =
           tracker.currentWidget?.context.sessionContext?.session?.kernel?.name;
-        if (kernel_name == undefined) {
+        if (typeof kernel_name !== 'string') {
           return false;
         } else {
           // enable jupyter-libyt command wrapper if the kernel is libyt_kernel
@@ -121,9 +125,9 @@ const plugin: JupyterFrontEndPlugin<void> = {
     mainMenu.kernelMenu.kernelUsers.restartKernel.add({
       id: 'jupyter-libyt:restart',
       isEnabled: (w: Widget) => {
-        let kernel_name =
+        const kernel_name =
           tracker.currentWidget?.context.sessionContext?.session?.kernel?.name;
-        if (kernel_name == undefined) {
+        if (typeof kernel_name !== 'string') {
           return false;
         } else {
           // enable jupyter-libyt command wrapper if the kernel is libyt_kernel
