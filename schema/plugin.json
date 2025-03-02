@@ -1,6 +1,6 @@
 {
-  "title": "jupyter-libyt",
-  "description": "jupyter-libyt settings.",
+  "title": "@yt-project/jupyter-libyt",
+  "description": "@yt-project/jupyter-libyt settings.",
   "jupyter.lab.toolbars": {
     "Notebook": [
       {

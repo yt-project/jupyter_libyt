@@ -12,4 +12,4 @@ except ImportError:
 
 
 def _jupyter_labextension_paths():
-    return [{"src": "labextension", "dest": "jupyter-libyt"}]
+    return [{"src": "labextension", "dest": "@yt-project/jupyter-libyt"}]

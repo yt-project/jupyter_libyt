@@ -1,5 +1,5 @@
 {
-    "name": "jupyter-libyt",
+    "name": "@yt-project/jupyter-libyt",
     "version": "0.1.1",
     "description": "A JupyterLab extension for libyt.",
     "keywords": [

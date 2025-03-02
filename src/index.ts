@@ -74,7 +74,7 @@ const CommandIds: JupyterLibytCommandWrapper[] = [
  * Initialization data for the jupyter-libyt extension.
  */
 const plugin: JupyterFrontEndPlugin<void> = {
-  id: 'jupyter-libyt:plugin',
+  id: '@yt-project/jupyter-libyt:plugin',
   description: 'A JupyterLab extension for libyt.',
   autoStart: true,
   requires: [INotebookTracker, IMainMenu],
