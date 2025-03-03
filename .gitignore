@@ -108,3 +108,8 @@ ENV/
 report.html
 
 *.ipynb
+
+# JupyterLab extension development
+node_modules/
+.yarn/
+jupyter_libyt/labextension/
