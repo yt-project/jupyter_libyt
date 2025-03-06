@@ -21,3 +21,29 @@ This is a Jupyter provisioner for [`libyt`](https://github.com/yt-project/libyt)
   cd jupyter_libyt
   pip install .
   ```
+
+### Uninstall
+
+```bash
+# uninstall the package
+pip uninstall jupyter-libyt
+
+# remove the kernelspec folder
+rm -rf $<python-prefix>/share/jupyter/kernels/libyt_kernel
+```
+
+### Change Log
+
+#### 0.2.0
+
+- Drop support for Python 3.7.
+- Support JupyterLab >= 4.0.0 and Jupyter Notebook >= 7.0.0.
+- Add the frontend:
+  - Send notification and block it when `interrupt`/`restart`/`restart and run all` buttons are
+    clicked to avoid unwanted action showing.
+  - Send notification and block it when the interrupt and restart kernel menu are clicked to avoid
+    unwanted action showing.
+
+#### 0.1.0
+
+- Provide only the kernel provisioner for libyt kernel.
