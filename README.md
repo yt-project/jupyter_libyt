@@ -19,6 +19,8 @@ This is a Jupyter provisioner for [`libyt`](https://github.com/yt-project/libyt)
   ```bash
   git clone https://github.com/yt-project/jupyter_libyt.git
   cd jupyter_libyt
+  jlpm install      # make sure JupyterLab is already installed
+  jlpm run build
   pip install .
   ```
 
