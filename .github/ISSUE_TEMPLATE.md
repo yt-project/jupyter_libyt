@@ -1,7 +1,7 @@
-* jupyter_libyt version:
-* libyt version:
-* Python version:
-* Operating System:
+- jupyter_libyt version:
+- libyt version:
+- Python version:
+- Operating System:
 
 ### Summary
 
@@ -23,5 +23,3 @@ If there was a crash, please include the traceback here.
 ```
 
 #### Expected Outcome
-
-
