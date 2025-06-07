@@ -36,6 +36,10 @@ rm -rf $<python-prefix>/share/jupyter/kernels/libyt_kernel
 
 ### Change Log
 
+#### 0.3.0
+
+- Nothing changed, version bumped to match `libyt`/`yt_libyt`.
+
 #### 0.2.0
 
 - Drop support for Python 3.7.
