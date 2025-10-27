@@ -32,7 +32,7 @@ jobs:
       - name: Build source tarball and wheel
         run: python -m build
       - name: Upload source tarball and wheel
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           path: ./dist/jupyter_libyt*
 
